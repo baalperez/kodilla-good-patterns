@@ -1,6 +1,7 @@
 package com.kodilla.testing.collection;
 
 import org.junit.jupiter.api.*;
+
 import java.util.*;
 
 @DisplayName("Collection Test Suite")
@@ -27,8 +28,8 @@ public class CollectionTestSuite {
     }
 
     @DisplayName(
-        "when create object with empty list," +
-        "then exterminate should return that the list is empty"
+            "when create object with empty list," +
+                    "then exterminate should return that the list is empty"
     )
 
     @Test
@@ -45,12 +46,31 @@ public class CollectionTestSuite {
     }
 
     @DisplayName(
-        "when create object with some numbers list, " +
-        "then exterminate should return new list only with odd numbers)"
+            "when create object with some numbers list, " +
+                    "then exterminate should return new list only with odd numbers)"
     )
 
     @Test
     void testCaseOddNumbersExterminatorNormalList() {
+        //Given
+        Integer[] numberList1 = new Integer[20];
+        for (int i = 0; i < numberList1.length; i++) {
+            numberList1[i] = i+1;
+        }
+
+        Integer[] numberList2 = new Integer[] {2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
+
+        OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator(Arrays.asList(numberList1));
+
+        //When
+        List result = oddNumbersExterminator.exterminate(Arrays.asList(numberList1));
+        List expectedResult = Arrays.asList(numberList2);
+
+        //Then
+        Assertions.assertEquals(expectedResult, result);
+
+        ////////////////////////////   drugie rozwiązanie   ///////////////////////////////
+/*
         //Given
         List<Integer> numberList1 = new ArrayList<>();
         for (int i = 1; i <= 20; i++) {
@@ -77,5 +97,6 @@ public class CollectionTestSuite {
 
         //Then
         Assertions.assertEquals(expectedResult, result);
+ */
     }
 }

@@ -14,6 +14,7 @@ public class OddNumbersExterminator {
     public List<Integer> exterminate(List<Integer> numbers) {
         List<Integer> oddListNumbers = new ArrayList<>();
         if (!numbers.isEmpty()) {
+            System.out.println("New odd numbers list");
             for (Integer number : numbers) {
                 if (number % 2 == 0) {
                     oddListNumbers.add(number);
@@ -22,7 +23,6 @@ public class OddNumbersExterminator {
         } else {
             System.out.println("List is empty");
         }
-        System.out.println("New odd numbers list");
         return oddListNumbers;
     }
 }
