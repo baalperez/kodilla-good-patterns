@@ -36,10 +36,10 @@ public class CollectionTestSuite {
     void testCaseOddNumbersExterminatorEmptyList() {
         //Given
         List<Integer> numberList1 = new ArrayList<>();
-        OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator(numberList1);
+        OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator();
 
         //When
-        List result = oddNumbersExterminator.exterminate(numberList1);
+        oddNumbersExterminator.exterminate(numberList1);
 
         //Then
         Assertions.assertTrue(numberList1.isEmpty());
@@ -58,16 +58,15 @@ public class CollectionTestSuite {
             numberList1[i] = i+1;
         }
 
-        Integer[] numberList2 = new Integer[] {2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
+        Integer[] expected = new Integer[] {2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
 
-        OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator(Arrays.asList(numberList1));
+        OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator();
 
         //When
         List result = oddNumbersExterminator.exterminate(Arrays.asList(numberList1));
-        List expectedResult = Arrays.asList(numberList2);
 
         //Then
-        Assertions.assertEquals(expectedResult, result);
+        Assertions.assertEquals(Arrays.asList(expected), result);
 
         ////////////////////////////   drugie rozwiązanie   ///////////////////////////////
 /*
@@ -77,26 +76,27 @@ public class CollectionTestSuite {
             numberList1.add(i);
         }
 
-        List<Integer> numberList2 = new ArrayList<>();
-        numberList2.add(2);
-        numberList2.add(4);
-        numberList2.add(6);
-        numberList2.add(8);
-        numberList2.add(10);
-        numberList2.add(12);
-        numberList2.add(14);
-        numberList2.add(16);
-        numberList2.add(18);
-        numberList2.add(20);
+        List<Integer> expected = new ArrayList<>();
+        expected.add(2);
+        expected.add(4);
+        expected.add(6);
+        expected.add(8);
+        expected.add(10);
+        expected.add(12);
+        expected.add(14);
+        expected.add(16);
+        expected.add(18);
+        expected.add(20);
 
-        OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator(numberList1);
+        OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator();
 
         //When
         List result = oddNumbersExterminator.exterminate(numberList1);
-        List expectedResult = numberList2;
 
         //Then
-        Assertions.assertEquals(expectedResult, result);
+        Assertions.assertEquals(expected, result);
+
  */
     }
 }
+

@@ -5,12 +5,6 @@ import java.util.List;
 
 public class OddNumbersExterminator {
 
-    List<Integer> numbersList;
-
-    public OddNumbersExterminator(List<Integer> numbersList) {
-        this.numbersList = numbersList;
-    }
-
     public List<Integer> exterminate(List<Integer> numbers) {
         List<Integer> oddListNumbers = new ArrayList<>();
         if (!numbers.isEmpty()) {
