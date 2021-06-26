@@ -57,6 +57,4 @@ public class ForumTestSuite {
         // Then
         Assertions.assertEquals(expectedResult, result);
     }
-
-
 }
