@@ -47,6 +47,5 @@ public class StreamMain {
         poemBeautifier.beautify("Konrad", PoemEmbellishment::textToUpperCase);
         poemBeautifier.beautify("koNRaD", PoemEmbellishment::textToLowerCase);
         poemBeautifier.beautify("Ala ma kota", PoemEmbellishment::replaceText);
-
     }
 }

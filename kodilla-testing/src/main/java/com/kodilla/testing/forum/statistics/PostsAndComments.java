@@ -1,16 +1,12 @@
 package com.kodilla.testing.forum.statistics;
 
-import javax.print.DocFlavor;
-import java.util.ArrayList;
-import java.util.List;
-
 public class PostsAndComments {
 
     private Statistics statistics;
 
     private int postsCount;
     private int commentsCount;
-    private int userCount;
+    private int usersCount;
     private double averageNumberOfPostsPerUser;
     private double averageNumberOfCommentsPerUser;
     private double averageNumberOfCommentsPerPost;
@@ -19,35 +15,27 @@ public class PostsAndComments {
         this.statistics = statistics;
     }
 
-    public double calculateAdvStatistics(Statistics statistics) {
-        if (postsCount == 0) {
-            averageNumberOfPostsPerUser = 0;
-            return averageNumberOfPostsPerUser;
-        } else if (postsCount != 0) {
-            if (((postsCount > commentsCount || postsCount < commentsCount) && (postsCount == 1) || (userCount == 1))) {
-                averageNumberOfCommentsPerPost = (double) postsCount / commentsCount;
-                return averageNumberOfCommentsPerPost;
-            } else {
-                averageNumberOfPostsPerUser = (double) postsCount / userCount;
-                return averageNumberOfPostsPerUser;
-            }
-        } else if (commentsCount == 0) {
-            averageNumberOfCommentsPerUser = 0;
-            return averageNumberOfCommentsPerUser;
-        } else if (userCount == 100) {
-            userCount = 0;
-            return userCount;
+    public void calculateAdvStatistics(Statistics statistics) {
+        usersCount = statistics.usersNames().size();
+        postsCount = statistics.postsCount();
+        commentsCount = statistics.commentsCount();
+
+        if (usersCount > 0) {
+            averageNumberOfPostsPerUser = postsCount / usersCount;
+            averageNumberOfCommentsPerUser = commentsCount / usersCount;
         }
 
-
-        return 500.500;
+        if (postsCount > 0) {
+            averageNumberOfCommentsPerPost = (double) commentsCount / postsCount;
+        }
     }
 
     public String showStatistics() {
-        return Integer.valueOf(getUserCount()) + ", " + Integer.valueOf(getPostsCount()) + ", "
-                + Integer.valueOf(getCommentsCount()) + ", " + Double.valueOf(getAverageNumberOfPostsPerUser()) + ", "
-                + Double.valueOf(getAverageNumberOfCommentsPerUser()) + ", " + Double.valueOf(getAverageNumberOfCommentsPerPost());
-
+        calculateAdvStatistics(statistics);
+        String result = getUsersCount() + ", " + getPostsCount() + ", " + getCommentsCount() + ", " +
+                getAverageNumberOfPostsPerUser() + ", " + getAverageNumberOfCommentsPerUser() + ", " +
+                getAverageNumberOfCommentsPerPost();
+        return result;
     }
 
     public int getPostsCount() {
@@ -58,8 +46,8 @@ public class PostsAndComments {
         return commentsCount;
     }
 
-    public int getUserCount() {
-        return userCount;
+    public int getUsersCount() {
+        return usersCount;
     }
 
     public double getAverageNumberOfPostsPerUser() {
@@ -82,8 +70,20 @@ public class PostsAndComments {
         this.commentsCount = commentsCount;
     }
 
-    public void setUserCount(int userCount) {
-        this.userCount = userCount;
+    public void setUsersCount(int usersCount) {
+        this.usersCount = usersCount;
+    }
+
+    public void setAverageNumberOfPostsPerUser(double averageNumberOfPostsPerUser) {
+        this.averageNumberOfPostsPerUser = averageNumberOfPostsPerUser;
+    }
+
+    public void setAverageNumberOfCommentsPerUser(double averageNumberOfCommentsPerUser) {
+        this.averageNumberOfCommentsPerUser = averageNumberOfCommentsPerUser;
+    }
+
+    public void setAverageNumberOfCommentsPerPost(double averageNumberOfCommentsPerPost) {
+        this.averageNumberOfCommentsPerPost = averageNumberOfCommentsPerPost;
     }
 
     @Override
@@ -95,14 +95,26 @@ public class PostsAndComments {
 
         if (postsCount != that.postsCount) return false;
         if (commentsCount != that.commentsCount) return false;
-        return userCount == that.userCount;
+        if (usersCount != that.usersCount) return false;
+        if (Double.compare(that.averageNumberOfPostsPerUser, averageNumberOfPostsPerUser) != 0) return false;
+        if (Double.compare(that.averageNumberOfCommentsPerUser, averageNumberOfCommentsPerUser) != 0)
+            return false;
+        return Double.compare(that.averageNumberOfCommentsPerPost, averageNumberOfCommentsPerPost) == 0;
     }
 
     @Override
     public int hashCode() {
-        int result = postsCount;
+        int result;
+        long temp;
+        result = postsCount;
         result = 31 * result + commentsCount;
-        result = 31 * result + userCount;
+        result = 31 * result + usersCount;
+        temp = Double.doubleToLongBits(averageNumberOfPostsPerUser);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(averageNumberOfCommentsPerUser);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(averageNumberOfCommentsPerPost);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
 }
