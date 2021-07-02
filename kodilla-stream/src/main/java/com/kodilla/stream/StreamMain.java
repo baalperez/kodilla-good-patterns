@@ -1,56 +1,86 @@
 package com.kodilla.stream;
 
-import com.kodilla.stream.beautifier.PoemBeautifier;
-import com.kodilla.stream.beautifier.PoemEmbellishment;
-import com.kodilla.stream.iterate.NumbersGenerator;
-import com.kodilla.stream.lambda.Processor;
-import com.kodilla.stream.lambda.ExpressionExecutor;
-import com.kodilla.stream.reference.FunctionalCalculator;
+import com.kodilla.stream.book.Book;
+import com.kodilla.stream.book.BookDirectory;
+import com.kodilla.stream.forumuser.Forum;
+import com.kodilla.stream.forumuser.ForumUser;
+import com.kodilla.stream.person.People;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class StreamMain {
     public static void main(String[] args) {
 
-        System.out.println();
-
-        Processor processor = new Processor();
-        processor.execute(() -> System.out.println("This is an example text."));
+/*        People.getList().stream()
+                .forEach(System.out::println);
 
         System.out.println();
-
-        ExpressionExecutor expressionExecutor = new ExpressionExecutor();
-        System.out.println("Calculating expressions with lambdas");
-        expressionExecutor.executeExpression(10,5, (a, b) -> a + b);
-        expressionExecutor.executeExpression(10,5, (a, b) -> a - b);
-        expressionExecutor.executeExpression(10,5, (a, b) -> a * b);
-        expressionExecutor.executeExpression(10,5, (a, b) -> a / b);
+        People.getList().stream()
+                .map(s -> s.toUpperCase())
+                .forEach(System.out::println);
 
         System.out.println();
-        System.out.println("Calculating expressions with method references");
-        expressionExecutor.executeExpression(8, 4, FunctionalCalculator::divideAByB);
-        expressionExecutor.executeExpression(8, 4, FunctionalCalculator::addAToB);
-        expressionExecutor.executeExpression(8, 4, FunctionalCalculator::SubBFromA);
-        expressionExecutor.executeExpression(8, 4, FunctionalCalculator::multiplyAByB);
+        People.getList().stream()
+                .map(String::toUpperCase)
+                .forEach(s -> System.out.println(s));
 
         System.out.println();
-        PoemBeautifier poemBeautifier = new PoemBeautifier();
-
-        System.out.println("Beautifier with lambdas");
-        poemBeautifier.beautify("Konrad", (text) -> ("ABC" + text));
-        poemBeautifier.beautify("Konrad", (text) -> (text + "ABC"));
-        poemBeautifier.beautify("Konrad", (text) -> (text.toUpperCase()));
-        poemBeautifier.beautify("koNRaD", (text) -> (text.toLowerCase()));
-        poemBeautifier.beautify("Ala ma kota", (text) -> (text.replace("Ala", "Ola")));
+        People.getList().stream()
+                .filter(s -> s.length() > 11)
+                .forEach(System.out::println);
 
         System.out.println();
-        System.out.println("Beautifier with method references");
-        poemBeautifier.beautify("Konrad", PoemEmbellishment::ABCBeforeText);
-        poemBeautifier.beautify("Konrad", PoemEmbellishment::ABCAfterText);
-        poemBeautifier.beautify("Konrad", PoemEmbellishment::textToUpperCase);
-        poemBeautifier.beautify("koNRaD", PoemEmbellishment::textToLowerCase);
-        poemBeautifier.beautify("Ala ma kota", PoemEmbellishment::replaceText);
+        People.getList().stream()
+                .map(String::toUpperCase)
+                .filter(s -> s.length() > 11)
+                .map(s -> s.substring(0, s.indexOf(' ') + 2) + ".")
+                .forEach(System.out::println);
 
         System.out.println();
-        System.out.println("Using Stream to generate even numbers from 1 to 20");
-        NumbersGenerator.generateEven(20);
+        BookDirectory bookDirectory = new BookDirectory();
+        bookDirectory.getList().stream()
+                .filter(book -> book.getYearOfPublication() > 2005)
+                .forEach(System.out::println);
+
+        System.out.println();
+        BookDirectory theBookDirectory = new BookDirectory();
+        List<Book> theResultListOfBook = theBookDirectory.getList().stream()
+                .filter(book -> book.getYearOfPublication() > 2005)
+                .collect(Collectors.toList());
+        System.out.println("# elements: " + theResultListOfBook.size());
+        theResultListOfBook.stream()
+                .forEach(System.out::println);
+
+        System.out.println();
+        BookDirectory theBookDirectory2 = new BookDirectory();
+        Map<String, Book> theResultMapOfBooks = theBookDirectory2.getList().stream()
+                .filter(book -> book.getYearOfPublication() > 2005)
+                .collect(Collectors.toMap(Book::getSignature, book -> book));
+        System.out.println("# elements: " + theResultMapOfBooks.size());
+        theResultMapOfBooks.entrySet().stream()
+                .map(entry -> entry.getKey() + ": " +  entry.getValue())
+                .forEach(System.out::println);
+
+        System.out.println();
+        String theResultStringOfBooks = bookDirectory.getList().stream()
+                .filter(book -> book.getYearOfPublication() > 2005)
+                .map(Book::toString)
+                .collect(Collectors.joining(",\n","<<",">>"));
+        System.out.println(theResultStringOfBooks);
+*/
+        // Rozwiązanie zadania: funkcyjny spacer po liście użytkowników forum
+        Forum theForum = new Forum();
+        Map<Integer, ForumUser> theResultMapOfForumUsers = theForum.getUserList().stream()
+                .filter(sex -> sex.getSex() == 'M')
+                .filter(age -> age.getBirthDate().getYear() <= 2001)
+                .filter(posts -> posts.getPostsQuantity() >= 1)
+                .collect(Collectors.toMap(ForumUser::getUserId, forum -> forum));
+        System.out.println("The result map has " + theResultMapOfForumUsers.size() + " element(s)");
+        theResultMapOfForumUsers.entrySet().stream()
+                .map(entry -> entry.getKey() + ": " + entry.getValue())
+                .forEach(System.out::println);
     }
 }
