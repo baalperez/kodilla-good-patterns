@@ -2,6 +2,8 @@ package com.kodilla.stream;
 
 import com.kodilla.stream.book.Book;
 import com.kodilla.stream.book.BookDirectory;
+import com.kodilla.stream.forumuser.Forum;
+import com.kodilla.stream.forumuser.ForumUser;
 import com.kodilla.stream.person.People;
 
 import java.util.List;
@@ -66,5 +68,18 @@ public class StreamMain {
 
         System.out.println();
 
+
+        // Rozwiązanie zadania: funkcyjny spacer po liście użytkowników forum
+        Forum theForum = new Forum();
+        Map<Integer, ForumUser> theResultMapOfForumUsers = theForum.getUserList().stream()
+                .filter(sex -> sex.getSex() == 'M')
+                .filter(age -> age.getBirthDate().getYear() <= 2001)
+                .filter(posts -> posts.getPostsQuantity() >= 1)
+                .collect(Collectors.toMap(ForumUser::getUserId, forum -> forum));
+        System.out.println("The result map has " + theResultMapOfForumUsers.size() + " element(s)");
+        theResultMapOfForumUsers.entrySet().stream()
+                .map(entry -> entry.getKey() + ": " + entry.getValue())
+                .forEach(System.out::println);
     }
 }
+

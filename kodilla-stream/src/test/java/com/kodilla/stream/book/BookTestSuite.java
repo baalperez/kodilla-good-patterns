@@ -40,9 +40,9 @@ public class BookTestSuite {
                 .filter(n -> books.get(n).getYearOfPublication() > 2007)
                 .count();
         /*
-        int numberOfBooksPublicatedAfter2007 = IntStream.range(0, books.size()) // [1]
-                .filter(n -> books.get(n).getYearOfPublication() > 2007)             // [2]
-                .map(n -> 1)                                                         // [3]
+        int numberOfBooksPublicatedAfter2007 = IntStream.range(0, books.size())
+                .filter(n -> books.get(n).getYearOfPublication() > 2007)
+                .map(n -> 1)
                 .sum();
          */
         assertEquals(3, numberOfBooksPublicatedAfter2007);

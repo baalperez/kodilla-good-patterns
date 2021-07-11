@@ -105,7 +105,7 @@ public class BoardTestSuite {
         assertEquals(user, tasks.get(0).getAssignedUser());
         assertEquals(user, tasks.get(1).getAssignedUser());
     }
-/*
+
     @Test
     void testAddTaskListFindOutdatedTasks() {
         //Given
@@ -144,7 +144,7 @@ public class BoardTestSuite {
         //Then
         assertEquals(2, longTasks);
     }
- */
+
 
     @Test
     void testAddTaskListAverageWorkingOnTask() {
@@ -152,18 +152,15 @@ public class BoardTestSuite {
         Board project = prepareTestData();
 
         //When
-        List<TaskList> averageTimeFromCreated = new ArrayList<>();
-        averageTimeFromCreated.add(new TaskList("In progress"));
-        List<Task> tasks = project.getTaskLists().stream()
-                .filter(averageTimeFromCreated::contains)
+        Double tasks = project.getTaskLists().stream()
+                .filter(tl -> tl.getName().equals("In progress"))
                 .flatMap(tl -> tl.getTasks().stream())
                 .filter(t -> t.getCreated().isBefore(LocalDate.now()))
-                .collect(toList());
-
-        double averageValue = IntStream.range(0, averageTimeFromCreated.size())
+                .map(t -> LocalDate.now().getDayOfYear() - t.getCreated().getDayOfYear())
+                .mapToDouble(t -> t)
                 .average().getAsDouble();
 
         //Then
-        assertEquals(10, averageValue);
+        assertEquals(15.0, tasks);
     }
 }
