@@ -18,9 +18,12 @@ public class FlightSearch {
         airportMap.put("Katowice", true);
         airportMap.put("Rome", true);
         airportMap.put("Dortmund", true);
+        airportMap.put("Rybnik", false);
 
         if (airportMap.containsKey(flight.getArrivalAirport()) &&
-                airportMap.containsKey(flight.getDepartureAirport())) {
+                airportMap.containsKey(flight.getDepartureAirport()) &&
+                airportMap.get(flight.getDepartureAirport()) &&
+                airportMap.get(flight.getArrivalAirport())) {
             System.out.println("Yes. You can fly from " + flight.getDepartureAirport() + " to " + flight.getArrivalAirport());
         } else {
             throw new RouteNotFoundException("One of the airport does not exist");
@@ -32,9 +35,9 @@ public class FlightSearch {
         FlightSearch flightSearch = new FlightSearch();
 
         try {
-            flightSearch.findFilght(new Flight("Rome", "Tokyo"));
+            flightSearch.findFilght(new Flight("Madrid", "Rybnik"));
         } catch (RouteNotFoundException e) {
-            System.out.println("Sorry, something went wrong! ");
+            System.out.println(e);
         }
     }
 }
