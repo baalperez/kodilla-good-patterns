@@ -1,11 +1,9 @@
 
 package com.kodilla.rps;
 
-import java.io.IOException;
-
 public class RpsRunner {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         boolean end = false;
         Introduction introduction = new Introduction();
@@ -15,7 +13,6 @@ public class RpsRunner {
         int whatToDo;
         whatToDo = game.decision();
         while (!end) {
-
             switch (whatToDo) {
                 case 0 -> {
                     System.out.println("Good Bye");

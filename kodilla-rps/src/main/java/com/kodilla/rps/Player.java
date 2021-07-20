@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Player {
 
+    Scanner scanner = new Scanner(System.in);
     private String name;
     private int numberOfRoundToWin;
 
@@ -17,7 +18,6 @@ public class Player {
 
     public void setName() {
         String tmpName;
-        Scanner scanner = new Scanner(System.in);
         do {
             System.out.println("What is your name?");
             tmpName = scanner.nextLine();
@@ -29,11 +29,15 @@ public class Player {
     }
 
     public void setNumberOfRoundToWin() {
-        Scanner scanner = new Scanner(System.in);
-        int quantity;
+        int quantity = 0;
         do {
-            System.out.println("How many won rounds we play to?");
-            quantity = scanner.nextInt();
+            try {
+                System.out.println("How many won rounds we play to?");
+                quantity = scanner.nextInt();
+            } catch (Exception e) {
+                System.out.println("Bad choice");
+                scanner.next();
+            }
         } while (!(quantity > 0));
         this.numberOfRoundToWin = quantity;
     }

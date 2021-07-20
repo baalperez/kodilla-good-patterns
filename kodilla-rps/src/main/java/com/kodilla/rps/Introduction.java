@@ -1,8 +1,11 @@
 package com.kodilla.rps;
 
-import java.io.IOException;
+import java.util.Scanner;
 
 public class Introduction {
+
+    Scanner scanner = new Scanner(System.in);
+
 
     public void intro() {
         System.out.println();
@@ -11,25 +14,30 @@ public class Introduction {
         System.out.println("////////////////////////////////////////////////////////////");
     }
 
-    public char choice() throws IOException {
-        char choice, ignore;
+    public int choice() {
+        int choice = 0;
         do {
-            System.out.println("Choose an option: 1 - Basic Version, 2 - Extended Version");
-            choice = (char) System.in.read();
-            do {
-                ignore = (char) System.in.read();
-            } while (ignore != '\n');
-        } while (choice != '1' && choice != '2');
+            try {
+                System.out.println("Choose an option: 1 - Basic Version, 2 - Extended Version");
+                choice = scanner.nextInt();
+                if (choice != 1 && choice != 2) {
+                    System.out.println("Try again");
+                }
+            } catch (Exception e) {
+                System.out.println("Bad choice");
+                scanner.next();
+            }
+        } while (choice != 1 && choice != 2);
         return choice;
     }
 
-    public void gameOption(char choice) {
+    public void gameOption(int choice) {
         switch (choice) {
-            case '1' -> {
+            case 1 -> {
                 basicRules();
                 basicVersion();
             }
-            case '2' -> extendedVersion();
+            case 2 -> extendedVersion();
         }
     }
 
