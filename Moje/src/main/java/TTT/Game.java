@@ -20,7 +20,7 @@ public class Game {
         for (int i = 0; i < 9; i++) {
             final int idx = i;
             JButton button = new JButton();
-            buttons[i] = button;;
+            buttons[i] = button;
             panel.add(button);
             Border border = BorderFactory.createLineBorder(Color.BLUE, 3);
             button.setBorder(border);
