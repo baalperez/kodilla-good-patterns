@@ -4,17 +4,12 @@ public class User {
 
     private final String userLogin;
     private final String userName;
-    private final String mailAddress;
-    private final String homeAddress;
-    private final String phoneNumber;
+    private final AddressData addressData;
 
-    public User(final String userLogin, final String userName, final String mailAddress,
-                final String homeAddress, final String phoneNumber) {
+    public User(final String userLogin, final String userName, AddressData addressData) {
         this.userLogin = userLogin;
         this.userName = userName;
-        this.mailAddress = mailAddress;
-        this.homeAddress = homeAddress;
-        this.phoneNumber = phoneNumber;
+        this.addressData = addressData;
     }
 
     public String getUserLogin() {
@@ -23,28 +18,5 @@ public class User {
 
     public String getUserName() {
         return userName;
-    }
-
-    public String getMailAddress() {
-        return mailAddress;
-    }
-
-    public String getHomeAddress() {
-        return homeAddress;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userLogin='" + userLogin + '\'' +
-                ", userName='" + userName + '\'' +
-                ", mailAddress='" + mailAddress + '\'' +
-                ", homeAddress='" + homeAddress + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                '}';
     }
 }
