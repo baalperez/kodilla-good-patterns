@@ -3,6 +3,7 @@ package com.kodilla.kodillaspring;
 import com.kodilla.spring.forum.ForumUser;
 import com.kodilla.spring.shape.Circle;
 import com.kodilla.spring.shape.Shape;
+import com.kodilla.spring.shape.Square;
 import com.kodilla.spring.shape.Triangle;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 public class KodillaSpringApplicationTests {
 
-    @Test
+/*    @Test
     void testCircleLoadedIntoContainer() {
         //Given
         ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
@@ -27,8 +28,9 @@ public class KodillaSpringApplicationTests {
         //Then
         assertEquals("This is a circle", name);
     }
+ */
 
-    @Test
+/*    @Test
     void testTriangleLoadedContainer() {
         //Given
         ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
@@ -40,21 +42,71 @@ public class KodillaSpringApplicationTests {
         //Then
         assertEquals("This is a triangle", name);
     }
+ */
+
+/*    @Test
+    void testSquareLoadedIntoContainer() {
+        //Given
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
+        Shape shape = context.getBean(Square.class);
+
+        //When
+        String name = shape.getShapeName();
+
+        //Then
+        assertEquals("This is a square", name);
+    }
+ */
 
     @Test
-    void contextLoads() {
+    void testCircleLoadedIntoContainer() {
+        // Given
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
+        Shape shape = (Shape) context.getBean("triangle");
+
+        //When
+        String name = shape.getShapeName();
+
+        //Then
+        assertEquals("This is a triangle", name);
     }
 
     @Test
-    void testGetUsername() {
+    void testTriangleLoadedIntoContainer() {
         //Given
         ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
-        ForumUser forumUser = context.getBean(ForumUser.class);
+        Shape shape = (Shape) context.getBean("circle");
 
         //When
-        String name = forumUser.getUsername();
+        String name = shape.getShapeName();
 
         //Then
-        assertEquals("John Smith", name);
+        assertEquals("This is a circle", name);
+    }
+
+    @Test
+    void testSquareLoadedIntoContainer() {
+        //Given
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
+        Shape shape = (Shape) context.getBean("createSquare");
+
+        //When
+        String name = shape.getShapeName();
+
+        //Then
+        assertEquals("This is a square", name);
+    }
+
+    @Test
+    void testShapeLoadedIntoContainer() {
+        //Given
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
+        Shape shape = (Shape) context.getBean("chosenShape");
+
+        //When
+        String name = shape.getShapeName();
+
+        //Then
+        System.out.println("\nChosen shape says: " + name);
     }
 }
