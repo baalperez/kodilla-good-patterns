@@ -6,4 +6,6 @@ include 'kodilla-rps'
 include 'Moje'
 include 'Blackjack'
 include 'kodilla-spring'
+include 'kodilla-spring-web'
+
 
