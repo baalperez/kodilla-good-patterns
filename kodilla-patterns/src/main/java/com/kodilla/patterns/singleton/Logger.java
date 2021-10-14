@@ -2,9 +2,7 @@ package com.kodilla.patterns.singleton;
 
 public enum Logger {
 
-    LOG1("LOG1"),
-    LOG2("LOG2"),
-    LOG3("LOG3");
+    LOG("Wednesday");
 
     private String lastLog = "";
 

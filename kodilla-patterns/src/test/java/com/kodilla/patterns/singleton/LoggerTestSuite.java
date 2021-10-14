@@ -24,12 +24,12 @@ public class LoggerTestSuite {
     @Test
     void testGetLastLog() {
         //Given
-        Logger logger = Logger.LOG3;
+        Logger logger = Logger.LOG;
 
         //When
         String logName = logger.getLastLog();
 
         //Then
-        assertEquals("LOG3", logName);
+        assertEquals("Wednesday", logName);
     }
 }
